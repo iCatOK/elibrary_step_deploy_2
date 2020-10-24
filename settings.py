@@ -31,6 +31,8 @@ INSTALLED_ADDONS = [
 # Note that any settings you provide before the next two lines are liable to be
 # overwritten, so they should be placed *after* this section.
 
+ALDRYN_SSO_ALWAYS_REQUIRE_LOGIN = False
+
 import aldryn_addons.settings
 aldryn_addons.settings.load(locals())
 
@@ -44,7 +46,24 @@ aldryn_addons.settings.load(locals())
 
 INSTALLED_APPS.extend([
     # Extend the INSTALLED_APPS setting by listing additional applications here
+    'rest_framework',
+    'rest_framework.authtoken',
+    'dj_rest_auth',
+    'allauth',
+    'allauth.account',
+    'dj_rest_auth.registration',
+    'api'
 ])
+
+AUTH_USER_MODEL = 'api.User'
+
+ACCOUNT_ADAPTER = 'api.adapters.CustomUserAccountAdapter'
+
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
+
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'api.serializers.RegisterSerializer',
+}
 
 # To see the settings that have been applied, use the Django diffsettings 
 # management command. 
